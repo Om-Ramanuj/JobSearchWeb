@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post a Job</title>
+    <style>
+        body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: #f4f6f8;
+          margin: 0;
+          padding: 0;
+        }
+
+        .container {
+          max-width: 700px;
+          margin: 60px auto;
+          background: white;
+          padding: 40px 30px;
+          border-radius: 12px;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+          text-align: center;
+          color: #2c3e50;
+          margin-bottom: 30px;
+        }
+
+        form {
+          display: grid;
+          gap: 20px;
+        }
+
+        .form-group {
+          display: flex;
+          flex-direction: column;
+        }
+
+        label {
+          font-weight: 600;
+          margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        textarea {
+          padding: 12px;
+          font-size: 15px;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+        }
+
+        textarea {
+          resize: vertical;
+        }
+
+        .checkbox-group {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+          padding: 10px 0;
+        }
+
+        .checkbox-group label {
+          font-weight: normal;
+        }
+
+        button {
+          padding: 12px;
+          font-size: 16px;
+          background-color: #28a745;
+          border: none;
+          color: white;
+          border-radius: 6px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+          background-color: #218838;
+        }
+
+        .back-link {
+          text-align: center;
+          margin-top: 30px;
+        }
+
+        .back-link a {
+          color: #007bff;
+          text-decoration: none;
+        }
+
+        .back-link a:hover {
+          text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Post a Job Profile</h2>
+    <form id="jobForm">
+        <div class="form-group">
+            <label for="profile">Job Profile</label>
+            <input type="text" id="profile" name="profile" required>
+        </div>
+
+        <div class="form-group">
+            <label for="exp">Experience (e.g. 2 years)</label>
+            <input type="text" id="exp" name="exp" required>
+        </div>
+
+        <div class="form-group">
+            <label for="desc">Job Description</label>
+            <textarea id="desc" name="desc" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Select Required Skills:</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="techs" value="Java"> Java</label>
+                <label><input type="checkbox" name="techs" value="Spring Boot"> Spring Boot</label>
+                <label><input type="checkbox" name="techs" value="React"> React</label>
+                <label><input type="checkbox" name="techs" value="Angular"> Angular</label>
+                <label><input type="checkbox" name="techs" value="Node.js"> Node.js</label>
+                <label><input type="checkbox" name="techs" value="Python"> Python</label>
+                <label><input type="checkbox" name="techs" value="MongoDB"> MongoDB</label>
+                <label><input type="checkbox" name="techs" value="SQL"> SQL</label>
+                <label><input type="checkbox" name="techs" value="AWS"> AWS</label>
+                <label><input type="checkbox" name="techs" value="Docker"> Docker</label>
+                <label><input type="checkbox" name="techs" value="Kubernetes"> Kubernetes</label>
+                <label><input type="checkbox" name="techs" value="Git"> Git</label>
+            </div>
+        </div>
+
+        <button type="submit">Post Job</button>
+    </form>
+
+    <div class="back-link">
+        <a href="index.html">← Back to Home</a>
+    </div>
+</div>
+
+<script>
+    document.getElementById("jobForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+
+      const checkedTechs = Array.from(form.querySelectorAll('input[name="techs"]:checked'))
+                                .map(input => input.value);
+
+      const postData = {
+        profile: form.profile.value,
+        exp: form.exp.value,
+        desc: form.desc.value,
+        techs: checkedTechs
+      };
+
+      try {
+        const response = await fetch("http://localhost:8080/post", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(postData)
+        });
+
+        if (response.ok) {
+          alert("Job posted successfully!");
+          form.reset();
+        } else {
+          alert("Failed to post job. Server error.");
+        }
+      } catch (err) {
+        alert("Error: Could not connect to backend.");
+        console.error(err);
+      }
+    });
+</script>
+
+</body>
+</html>
