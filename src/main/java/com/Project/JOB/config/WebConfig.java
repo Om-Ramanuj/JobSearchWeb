@@ -1,4 +1,3 @@
-package WebConfig;
 package com.Project.JOB.config;
 
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +10,12 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*") // ✅ For production, replace with your frontend URL
-                .allowedMethods("*");
+                .allowedOrigins(
+                        "http://localhost:3000",            // Local frontend
+                        "https://your-frontend.onrender.com" // Your deployed frontend
+                )
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*")
+                .allowCredentials(true);
     }
 }

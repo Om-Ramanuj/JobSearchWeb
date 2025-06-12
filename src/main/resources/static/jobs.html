@@ -190,7 +190,7 @@
 
     async function fetchAllJobs() {
       try {
-        const response = await fetch('http://localhost:8080/posts');
+        const response = await fetch('/posts');
         if (response.ok) {
           const jobs = await response.json();
           displayJobs(jobs);
@@ -210,7 +210,7 @@
       }
 
       try {
-        const response = await fetch(`http://localhost:8080/posts/${encodeURIComponent(query)}`);
+        const response = await fetch(`/posts/${encodeURIComponent(query)}`);
         if (response.ok) {
           const jobs = await response.json();
           displayJobs(jobs);
