@@ -8,29 +8,42 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*") // Allow all origins for frontend access (adjust for prod)
 @RestController
+@RequestMapping("/posts") // Base path
 public class PostController {
 
-    @Autowired  //Means Spring Will Create object for you//
-    PostRepository repo;
     @Autowired
-    SearchRepository srepo;
+    private PostRepository repo;
 
+    @Autowired
+    private SearchRepository srepo;
 
-    @GetMapping("/posts")
-    public List<Post> getAllPosts(){
-
+    // ✅ GET all job posts
+    @GetMapping
+    public List<Post> getAllPosts() {
         return repo.findAll();
     }
-    @PostMapping("/post")
-    public Post addPost(@RequestBody Post post){
-       return repo.save(post);
+
+    // ✅ Add a new job post
+    @PostMapping
+    public Post addPost(@RequestBody Post post) {
+        return repo.save(post);
     }
+
+    // ✅ Search posts by text
+    @GetMapping("/search/{text}")
+    public List<Post> search(@PathVariable String text) {
+        return srepo.findByText(text);
+    }
+
+    // ✅ Simple hello test
     @GetMapping("/hello")
     public String hello() {
         return "Hello, world!";
     }
+
+    // ✅ MongoDB connectivity test
     @GetMapping("/test-mongo")
     public String testMongo() {
         try {
@@ -41,9 +54,4 @@ public class PostController {
             return "Error: " + e.getMessage();
         }
     }
-    @GetMapping("/posts/{text}")
-    public List<Post> search(@PathVariable String text){
-        return srepo.findByText(text);
-    }
-
 }

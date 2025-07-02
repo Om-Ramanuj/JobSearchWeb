@@ -4,138 +4,113 @@
     <meta charset="UTF-8" />
     <title>Job Listings</title>
     <style>
-        /* Styling unchanged */
-        * {
-          box-sizing: border-box;
-        }
-
+        * { box-sizing: border-box; }
         body {
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          background: linear-gradient(to right, #dbe6f6, #c5796d);
-          margin: 0;
-          padding: 40px 10px;
-          display: flex;
-          justify-content: center;
-          align-items: flex-start;
-          min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #dbe6f6, #c5796d);
+            margin: 0;
+            padding: 40px 10px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
         }
-
         .container {
-          background: #ffffffdd;
-          backdrop-filter: blur(10px);
-          max-width: 900px;
-          width: 100%;
-          padding: 40px 30px;
-          border-radius: 20px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-          animation: fadeIn 0.6s ease;
+            background: #ffffffdd;
+            backdrop-filter: blur(10px);
+            max-width: 900px;
+            width: 100%;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.6s ease;
         }
-
         h1 {
-          text-align: center;
-          color: #2c3e50;
-          margin-bottom: 30px;
-          font-size: 2rem;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2rem;
         }
-
         #searchBar {
-          width: 100%;
-          padding: 14px 16px;
-          font-size: 16px;
-          border: 1.5px solid #ccc;
-          border-radius: 10px;
-          margin-bottom: 30px;
-          transition: border-color 0.3s ease;
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 16px;
+            border: 1.5px solid #ccc;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
         }
-
         #searchBar:focus {
-          border-color: #007bff;
-          outline: none;
+            border-color: #007bff;
+            outline: none;
         }
-
         .job-card {
-          background-color: #f8f9fa;
-          padding: 22px 20px;
-          border-radius: 14px;
-          margin-bottom: 20px;
-          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
+            background-color: #f8f9fa;
+            padding: 22px 20px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-
         .job-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
         }
-
         .job-profile {
-          font-size: 22px;
-          font-weight: 700;
-          color: #007bff;
-          margin-bottom: 10px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 10px;
         }
-
         .job-exp {
-          font-weight: 600;
-          color: #333;
-          margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
         }
-
         .job-desc {
-          font-size: 15px;
-          color: #555;
-          margin-bottom: 10px;
-          line-height: 1.5;
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 10px;
+            line-height: 1.5;
         }
-
         .job-techs {
-          font-size: 14px;
-          color: #666;
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
+            font-size: 14px;
+            color: #666;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
-
         .job-techs span {
-          background-color: #e1ecf4;
-          color: #0366d6;
-          padding: 5px 12px;
-          border-radius: 20px;
-          font-weight: 600;
-          font-size: 13px;
+            background-color: #e1ecf4;
+            color: #0366d6;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 13px;
         }
-
         .no-results {
-          text-align: center;
-          color: #999;
-          font-style: italic;
-          margin-top: 30px;
-          font-size: 16px;
+            text-align: center;
+            color: #999;
+            font-style: italic;
+            margin-top: 30px;
+            font-size: 16px;
         }
-
         .back-link {
-          text-align: center;
-          margin-top: 30px;
+            text-align: center;
+            margin-top: 30px;
         }
-
         .back-link a {
-          color: #007bff;
-          text-decoration: none;
-          font-weight: 600;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
         }
-
         .back-link a:hover {
-          text-decoration: underline;
+            text-decoration: underline;
         }
-
         @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -144,96 +119,89 @@
 <div class="container">
     <h1>Available Job Profiles</h1>
     <input type="text" id="searchBar" placeholder="Search jobs by skill, profile, or description..." />
-
     <div id="jobsList"></div>
-
     <div class="no-results" id="noResults" style="display: none;">
         No jobs found matching your search.
     </div>
-
     <div class="back-link">
         <a href="index.html">← Back to Home</a>
     </div>
 </div>
 
 <script>
+    const BASE_URL = 'http://localhost:8080'; // ✅ LOCAL BACKEND
+
     const jobsList = document.getElementById('jobsList');
     const searchBar = document.getElementById('searchBar');
     const noResults = document.getElementById('noResults');
 
-    const API_BASE = ''; // empty means same-origin
-
     function displayJobs(jobs) {
-      jobsList.innerHTML = '';
+        jobsList.innerHTML = '';
+        if (!jobs.length) {
+            noResults.style.display = 'block';
+            return;
+        } else {
+            noResults.style.display = 'none';
+        }
 
-      if (!jobs.length) {
-        noResults.style.display = 'block';
-        return;
-      } else {
-        noResults.style.display = 'none';
-      }
-
-      jobs.forEach(job => {
-        const techTags = job.techs.map(tech => `<span>${tech}</span>`).join('');
-
-        const jobCard = document.createElement('div');
-        jobCard.classList.add('job-card');
-
-        jobCard.innerHTML = `
-          <div class="job-profile">${job.profile}</div>
-          <div class="job-exp">Experience Required: ${job.exp}</div>
-          <div class="job-desc">${job.desc}</div>
-          <div class="job-techs">${techTags}</div>
-        `;
-
-        jobsList.appendChild(jobCard);
-      });
+        jobs.forEach(job => {
+            const techTags = job.techs.map(tech => `<span>${tech}</span>`).join('');
+            const jobCard = document.createElement('div');
+            jobCard.classList.add('job-card');
+            jobCard.innerHTML = `
+                <div class="job-profile">${job.profile}</div>
+                <div class="job-exp">Experience Required: ${job.exp}</div>
+                <div class="job-desc">${job.desc}</div>
+                <div class="job-techs">${techTags}</div>
+            `;
+            jobsList.appendChild(jobCard);
+        });
     }
 
     async function fetchAllJobs() {
-      try {
-        const response = await fetch(`${API_BASE}/posts`);
-        if (response.ok) {
-          const jobs = await response.json();
-          displayJobs(jobs);
-        } else {
-          alert('Failed to fetch jobs from server.');
+        try {
+            const response = await fetch(`${BASE_URL}/posts`);
+            if (response.ok) {
+                const jobs = await response.json();
+                displayJobs(jobs);
+            } else {
+                alert('Failed to fetch jobs from server.');
+            }
+        } catch (error) {
+            alert('Error: Could not connect to backend.');
+            console.error(error);
         }
-      } catch (error) {
-        alert('Error: Could not connect to backend.');
-        console.error(error);
-      }
     }
 
     async function searchJobs(query) {
-      if (!query.trim()) {
-        fetchAllJobs();
-        return;
-      }
-
-      try {
-        const response = await fetch(`${API_BASE}/posts/${encodeURIComponent(query)}`);
-        if (response.ok) {
-          const jobs = await response.json();
-          displayJobs(jobs);
-        } else {
-          alert('Failed to fetch search results from server.');
+        if (!query.trim()) {
+            fetchAllJobs();
+            return;
         }
-      } catch (error) {
-        alert('Error: Could not connect to backend.');
-        console.error(error);
-      }
+
+        try {
+            const response = await fetch(`${BASE_URL}/posts/${encodeURIComponent(query)}`);
+            if (response.ok) {
+                const jobs = await response.json();
+                displayJobs(jobs);
+            } else {
+                alert('Failed to fetch search results from server.');
+            }
+        } catch (error) {
+            alert('Error: Could not connect to backend.');
+            console.error(error);
+        }
     }
 
     fetchAllJobs();
 
     let debounceTimeout;
     searchBar.addEventListener('input', () => {
-      clearTimeout(debounceTimeout);
-      debounceTimeout = setTimeout(() => {
-        const query = searchBar.value;
-        searchJobs(query);
-      }, 400);
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => {
+            const query = searchBar.value;
+            searchJobs(query);
+        }, 400);
     });
 </script>
 
