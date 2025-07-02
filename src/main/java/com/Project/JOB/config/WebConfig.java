@@ -11,12 +11,14 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins(
-                        "http://localhost:3000", // Local React app
-                        "http://127.0.0.1:5500", // Local HTML testing (optional)
-                        "https://your-frontend.onrender.com" // Replace with your actual frontend Render URL
+                        "http://localhost:3000",        // React dev server
+                        "http://127.0.0.1:5500",        // Local HTML testing
+                        "file://",                      // Direct HTML file access
+                        "http://localhost:8080",        // Local backend
+                        "https://your-frontend.onrender.com" // Replace with actual deployed frontend URL
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
-                .allowCredentials(false); // Set to true only if using cookies/auth
+                .allowCredentials(false); // If using cookies, set this to true
     }
 }
